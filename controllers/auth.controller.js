@@ -7,7 +7,7 @@ export const singup = async (req,res)=>{
         const {fullName,username,password,confirmPassword,gender} = req.body;
         
         if(password !== confirmPassword){
-            return res.status(400).json({error:"Pasword don't match"})
+            return res.status(400).json({error:"Password don't match"})
         }
 
         const user = await User.findOne({username})
@@ -47,7 +47,7 @@ export const singup = async (req,res)=>{
         }
         
     } catch (error) {
-        console.log("Error in sgnup controller ",error.message);
+       
         res.status(500).json({error:"internal Server Error "});
         
     }
@@ -55,7 +55,7 @@ export const singup = async (req,res)=>{
 export const login= async (req,res)=>{
 try{
     const {username,password} = req.body;
-    // console.log(username,password)
+     
     const user = await User.findOne({ username})
     const isPasswordCorrect = await bcrypt.compare(password,user?.password || "")
 
@@ -77,7 +77,7 @@ try{
 
 
 } catch (error) {
-    console.log("Error in sgnup controller ",error.message);
+     
     res.status(500).json({error:"internal Server Error "});
     
 }
@@ -89,7 +89,7 @@ export const logout=  (req,res)=>{
 
     }
     catch (error) {
-        console.log("Error in sgnup controller ",error.message);
+        
         res.status(500).json({error:"internal Server Error "});
         
     }
